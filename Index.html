@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MathMaster Tuition | Expert Mathematics Tutoring</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #f8fafc;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #0f172a;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f59e0b;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: #0f172a;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #0f172a;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #f59e0b;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Subjects grid */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .subject-icon {
+            font-size: 2.5rem;
+            background: #fef3c7;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            color: #d97706;
+        }
+
+        .subject-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* Pricing cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .pricing-card.featured {
+            border-top: 5px solid #f59e0b;
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .pricing-card li {
+            margin: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .about-stats {
+            flex: 1;
+            background: #0f172a;
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial h4 {
+            color: #0f172a;
+        }
+
+        /* Contact form */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Math<span>Master</span></div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="home" class="hero">
+    <h1>Unlock Your Math Potential</h1>
+    <p>Expert tuition for GCSE, A-Level, University & beyond. Personalised learning that builds confidence and delivers results.</p>
+    <a href="#contact" class="btn">Book a Free Trial →</a>
+</section>
+
+<div class="container" id="subjects">
+    <h2 class="section-title">What We Teach</h2>
+    <div class="subjects-grid">
+        <div class="subject-card">
+            <div class="subject-icon">📐</div>
+            <h3>Algebra & Trigonometry</h3>
+            <p>Equations, functions, identities, and graphing — master the fundamentals.</p>
+        </div>
+        <div class="subject-card">
+            <div class="subject-icon">📊</div>
+            <h3>Calculus</h3>
+            <p>Differentiation, integration, limits, and series for A-Level and university.</p>
+        </div>
+        <div class="subject-card">
+            <div class="subject-icon">🎲</div>
+            <h3>Statistics & Probability</h3>
+            <p>Data analysis, distributions, hypothesis testing, and real-world applications.</p>
+        </div>
+        <div class="subject-card">
+            <div class="subject-icon">🧮</div>
+            <h3>Pure & Further Maths</h3>
+            <p>Complex numbers, matrices, vectors, and proof techniques.</p>
+        </div>
+        <div class="subject-card">
+            <div class="subject-icon">⚙️</div>
+            <h3>Mechanics</h3>
+            <p>Kinematics, dynamics, forces, and motion for physics & engineering.</p>
+        </div>
+        <div class="subject-card">
+            <div class="subject-icon">💰</div>
+            <h3>Financial Maths</h3>
+            <p>Interest, annuities, NPV, and mathematical modelling in finance.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="pricing">
+    <h2 class="section-title">Simple & Transparent Pricing</h2>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Pay As You Go</h3>
+            <div class="price">£35 <span>/ hour</span></div>
+            <ul>
+                <li>✅ 1-to-1 online tuition</li>
+                <li>✅ Flexible scheduling</li>
+                <li>✅ Homework help</li>
+                <li>✅ No long-term commitment</li>
+            </ul>
+            <a href="#contact" class="btn" style="background:#334155;">Choose Plan</a>
+        </div>
+        <div class="pricing-card featured">
+            <h3>⭐ Monthly Saver</h3>
+            <div class="price">£120 <span>/ month</span></div>
+            <ul>
+                <li>✅ 4 hours of 1-to-1 tuition</li>
+                <li>✅ Free revision materials</li>
+                <li>✅ Monthly progress report</li>
+                <li>✅ Priority booking</li>
+            </ul>
+            <a href="#contact" class="btn">Save 15% →</a>
+        </div>
+        <div class="pricing-card">
+            <h3>Group Workshop</h3>
+            <div class="price">£15 <span>/ hour</span></div>
+            <ul>
+                <li>✅ Small groups (max 6)</li>
+                <li>✅ Exam technique focus</li>
+                <li>✅ Past paper sessions</li>
+                <li>✅ Weekly quizzes</li>
+            </ul>
+            <a href="#contact" class="btn" style="background:#334155;">Join Group</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="about">
+    <h2 class="section-title">Why Choose MathMaster?</h2>
+    <div class="about-content">
+        <div class="about-text">
+            <p>Founded by Dr. Shihan Miah, a mathematician with over 10 years of teaching experience at top UK universities, MathMaster combines academic rigour with a supportive, student-first approach.</p>
+            <p>We believe every student can excel in mathematics when given the right guidance. Our tutors are hand-picked for their expertise and ability to explain complex concepts in simple, relatable terms.</p>
+            <p>Whether you're preparing for GCSEs, A-Levels, university exams, or professional qualifications, we tailor each lesson to your unique learning style and goals.</p>
+        </div>
+        <div class="about-stats">
+            <div class="stat-number">500+</div>
+            <p>Students tutored</p>
+            <div class="stat-number">92%</div>
+            <p>Achieved A*/A grades</p>
+            <div class="stat-number">24/7</div>
+            <p>Q&A support</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title">Success Stories</h2>
+    <div class="testimonial-grid">
+        <div class="testimonial">
+            <p>"MathMaster transformed my attitude to calculus. After just 6 sessions, I went from a C to an A in my A-Level mock exams. Highly recommend!"</p>
+            <h4>— Emily, Year 12</h4>
+        </div>
+        <div class="testimonial">
+            <p>"The step-by-step explanations and patience from my tutor helped me pass my university statistics module. The group workshops are excellent value."</p>
+            <h4>— James, Engineering Student</h4>
+        </div>
+        <div class="testimonial">
+            <p>"My daughter used to dread maths. Now she actually looks forward to lessons. Thank you for building her confidence."</p>
+            <h4>— Mrs. Patel, Parent</h4>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="contact">
+    <h2 class="section-title">Start Your Journey Today</h2>
+    <div class="contact-form">
+        <form id="tuitionForm">
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="name" required placeholder="e.g. Sarah Johnson">
+            </div>
+            <div class="form-group">
+                <label>Email Address *</label>
+                <input type="email" id="email" required placeholder="sarah@example.com">
+            </div>
+            <div class="form-group">
+                <label>Level / Course *</label>
+                <select id="level" required>
+                    <option value="">-- Select --</option>
+                    <option>GCSE / IGCSE</option>
+                    <option>A-Level / IB</option>
+                    <option>University (Undergraduate)</option>
+                    <option>Professional / Adult Learner</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Message (optional)</label>
+                <textarea rows="3" id="message" placeholder="Tell me what topics you need help with..."></textarea>
+            </div>
+            <button type="submit" class="btn">Request Free Consultation →</button>
+        </form>
+        <p id="formFeedback" style="margin-top: 1rem; text-align: center; color: #16a34a;"></p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 MathMaster Tuition — Empowering students through mathematics.</p>
+    <p style="margin-top: 0.5rem;">📧 hello@mathmaster.com | 📞 +44 20 1234 5678</p>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === "#" || href === "") return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // Simple form submission handler (mock)
+    const form = document.getElementById('tuitionForm');
+    const feedback = document.getElementById('formFeedback');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        if (!name) {
+            feedback.textContent = 'Please enter your name.';
+            feedback.style.color = '#dc2626';
+            return;
+        }
+        feedback.textContent = `Thanks ${name}! We'll email you within 24 hours to arrange your free trial.`;
+        feedback.style.color = '#16a34a';
+        form.reset();
+        setTimeout(() => { feedback.textContent = ''; }, 5000);
+    });
+</script>
+</body>
+</html>
